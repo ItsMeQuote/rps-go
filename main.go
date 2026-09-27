@@ -41,31 +41,38 @@ func main() {
 		var playerChoice string
 		fmt.Print("Выберите: камень, ножницы или бумага: ")
 		fmt.Scanln(&playerChoice)
+		playerChoice = strings.ToLower(playerChoice)
+		playerChoice = strings.TrimSpace(playerChoice)
 
 		printDivider()
 
-		botChoice := choices[rand.Intn(len(choices))]
-
-		if fullChoice, ok := shorts[playerChoice]; ok {
+		if playerChoice == "выход" || playerChoice == "q" {
+			var exitQuestion string
+			fmt.Print("🚪 Вы завершили игру. Для выхода нажмите Enter: ")
+			fmt.Scanln(&exitQuestion)
+			break
+		} else if fullChoice, ok := shorts[playerChoice]; ok {
 			playerChoice = fullChoice
 		}
 
 		if _, ok := beats[playerChoice]; !ok {
-			fmt.Println("Нужно ввести: камень/ножницы/бумага или первые буквы в этих словах.")
+			fmt.Println("Нужно ввести: камень/ножницы/бумага или первые буквы в этих словах.\nДля выхода введите выход/q.")
 			printDivider()
 			continue
 		}
+
+		botChoice := choices[rand.Intn(len(choices))]
 
 		if playerChoice == botChoice {
 			printResult("🤝 Ничья!", botChoice, playerChoice, score, "bot", "player")
 			printDivider()
 		} else if beats[playerChoice] == botChoice {
-			printResult("🎉 Вы выиграли!", botChoice, playerChoice, score, "bot", "player")
 			score["player"] += 1
+			printResult("🎉 Вы выиграли!", botChoice, playerChoice, score, "bot", "player")
 			printDivider()
 		} else {
-			printResult("❌ Вы проиграли!", botChoice, playerChoice, score, "bot", "player")
 			score["bot"] += 1
+			printResult("❌ Вы проиграли!", botChoice, playerChoice, score, "bot", "player")
 			printDivider()
 		}
 	}
