@@ -81,7 +81,7 @@ go build -o rps-go.exe
 ## Структура проекта
 
 ```text
-go-rock-paper-scissors/
+rps-go/
 ├── .gitignore
 ├── go.mod
 ├── main.go
@@ -89,3 +89,9 @@ go-rock-paper-scissors/
 └── images/
     └── game.png
 ```
+
+## Лицензия
+
+Этот проект распространяется под лицензией MIT.
+
+Copyright (c) 2026 ItsMeQuote
